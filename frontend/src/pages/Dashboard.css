@@ -1,0 +1,140 @@
+.dashboard {
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dashboard.light {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.dashboard.dark {
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+}
+
+.dashboard-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-theme,
+.btn-logout {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-theme {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.btn-logout {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #764ba2;
+}
+
+.btn-theme:hover,
+.btn-logout:hover {
+  opacity: 0.8;
+}
+
+.dashboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.profile-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.dashboard.dark .profile-card {
+  background: #2a2a2a;
+}
+
+.profile-card h2 {
+  margin: 0 0 1.5rem;
+  color: #667eea;
+}
+
+.profile-info {
+  display: grid;
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  padding: 0.75rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.dashboard.dark .info-item {
+  background-color: #333;
+}
+
+.info-item .label {
+  font-weight: 600;
+  min-width: 150px;
+  color: #666;
+}
+
+.dashboard.dark .info-item .label {
+  color: #aaa;
+}
+
+.info-item .value {
+  color: #333;
+}
+
+.dashboard.dark .info-item .value {
+  color: #f5f5f5;
+}
+
+.files-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard.dark .files-section {
+  background: #2a2a2a;
+}
+
+.files-section h2 {
+  margin: 0 0 1rem;
+  color: #667eea;
+}
+
+.placeholder-text {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
