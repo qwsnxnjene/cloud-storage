@@ -1,72 +1,32 @@
-import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
-import './Auth.css';
+import type { FC } from 'react';
+import { Cloud } from 'lucide-react';
+import { LoginForm } from '@/components/login-form';
+import { Link } from 'react-router-dom';
 
-const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-
-    try {
-      await login({ username, password });
-      navigate('/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data || 'Login failed. Please check your credentials.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+const Login: FC = () => {
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
-          {error && <div className="error-message">{error}</div>}
-          
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
-
-          <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </form>
-
-        <div className="auth-footer">
-          <p>
-            Don't have an account? <Link to="/register">Register</Link>
-          </p>
+    <div className="grid min-h-svh lg:grid-cols-2">
+      <div className="flex flex-col gap-4 p-6 md:p-10">
+        <div className="flex justify-center gap-2 md:justify-start">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
+              <Cloud className="size-5" />
+            </div>
+            <p className="text-accent-foreground font-bold">useCloud</p>
+          </Link>
         </div>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-sm">
+            <LoginForm />
+          </div>
+        </div>
+      </div>
+      <div className="bg-muted relative hidden overflow-hidden rounded-tl-xl rounded-bl-xl lg:block">
+        <img
+          src="/login.png"
+          className="absolute inset-0 h-full w-full object-cover"
+          alt="auth-cat"
+        />
       </div>
     </div>
   );

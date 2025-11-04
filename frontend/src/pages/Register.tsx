@@ -1,103 +1,31 @@
-import React, { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
-import './Auth.css';
+import type { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { RegisterForm } from '@/components/register-form';
+import { Cloud } from 'lucide-react';
 
-const Register: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { register } = useAuth();
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-
-      if (password !== confirmPassword) {
-        setError('Пароли не совпадают');
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      await register({ username, email, password });
-      navigate('/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data || 'Не удалось зарегистрироваться. Попробуйте ещё раз.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+const Register: FC = () => {
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-  <h1>Регистрация</h1>
-        <form onSubmit={handleSubmit}>
-          {error && <div className="error-message">{error}</div>}
-          
-          <div className="form-group">
-            <label htmlFor="username">Имя пользователя</label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              disabled={loading}
-            />
+    <div className="grid min-h-svh lg:grid-cols-2">
+      <div className="bg-muted relative hidden overflow-hidden rounded-tr-xl rounded-br-xl lg:block">
+        <img
+          src="/register.png"
+          className="absolute inset-0 h-full w-full object-cover"
+          alt="auth"
+        />
+      </div>
+      <div className="flex flex-col gap-4 p-6 md:p-10">
+        <div className="flex justify-center gap-2 md:justify-start">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
+              <Cloud className="size-5" />
+            </div>
+            <p className="text-accent-foreground font-bold">useCloud</p>
+          </Link>
+        </div>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-sm">
+            <RegisterForm />
           </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Электронная почта</label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Пароль</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Подтвердите пароль</label>
-            <input
-              id="confirmPassword"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
-
-          <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Регистрация...' : 'Зарегистрироваться'}
-          </button>
-        </form>
-
-        <div className="auth-footer">
-          <p>
-            Уже есть аккаунт? <Link to="/login">Войти</Link>
-          </p>
         </div>
       </div>
     </div>
