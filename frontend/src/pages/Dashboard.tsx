@@ -49,11 +49,14 @@ const Dashboard: FC = () => {
 
   // Get user initials for avatar
   const userInitials = user.username
-    .split(' ')
-    .map(n => n[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
+    ? user.username
+        .split(' ')
+        .map(n => n[0])
+        .filter(Boolean)
+        .join('')
+        .toUpperCase()
+        .slice(0, 2) || user.username.slice(0, 2).toUpperCase()
+    : 'U';
 
   return (
     <div className="min-h-svh bg-background">
