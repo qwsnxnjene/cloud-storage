@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { type FC, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { Cloud, Moon, Sun, LogOut, User, Mail, Calendar, Files } from 'lucide-react';
@@ -12,6 +12,17 @@ const Dashboard: FC = () => {
   const { user, logout, updateTheme } = useAuth();
   const navigate = useNavigate();
 
+  // Sync theme class with user's theme preference
+  useEffect(() => {
+    if (user) {
+      if (user.theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+  }, [user?.theme]);
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -22,7 +33,6 @@ const Dashboard: FC = () => {
       const newTheme = user.theme === 'light' ? 'dark' : 'light';
       try {
         await updateTheme(newTheme);
-        document.documentElement.classList.toggle('dark');
       } catch (error) {
         console.error('Failed to update theme:', error);
       }
@@ -46,16 +56,15 @@ const Dashboard: FC = () => {
     .slice(0, 2);
 
   return (
-    <div className={user.theme === 'dark' ? 'dark' : ''}>
-      <div className="min-h-svh bg-background">
-        {/* Header */}
-        <header className="border-b bg-card">
-          <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-            <Link to="/dashboard" className="flex items-center gap-2">
-              <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
-                <Cloud className="size-5" />
-              </div>
-              <span className="text-foreground font-bold">useCloud</span>
+    <div className="min-h-svh bg-background">
+      {/* Header */}
+      <header className="border-b bg-card">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+          <Link to="/dashboard" className="flex items-center gap-2">
+            <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
+              <Cloud className="size-5" />
+            </div>
+            <span className="text-foreground font-bold">useCloud</span>
             </Link>
 
             <div className="flex items-center gap-2">
@@ -180,7 +189,6 @@ const Dashboard: FC = () => {
           </div>
         </main>
       </div>
-    </div>
   );
 };
 
