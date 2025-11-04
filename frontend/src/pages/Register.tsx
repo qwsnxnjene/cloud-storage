@@ -17,8 +17,8 @@ const Register: React.FC = () => {
     e.preventDefault();
     setError('');
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      if (password !== confirmPassword) {
+        setError('Пароли не совпадают');
       return;
     }
 
@@ -28,7 +28,7 @@ const Register: React.FC = () => {
       await register({ username, email, password });
       navigate('/dashboard');
     } catch (err: any) {
-      setError(err.response?.data || 'Registration failed. Please try again.');
+      setError(err.response?.data || 'Не удалось зарегистрироваться. Попробуйте ещё раз.');
     } finally {
       setLoading(false);
     }
@@ -37,12 +37,12 @@ const Register: React.FC = () => {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h1>Register</h1>
+  <h1>Регистрация</h1>
         <form onSubmit={handleSubmit}>
           {error && <div className="error-message">{error}</div>}
           
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Имя пользователя</label>
             <input
               id="username"
               type="text"
@@ -54,7 +54,7 @@ const Register: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Электронная почта</label>
             <input
               id="email"
               type="email"
@@ -66,7 +66,7 @@ const Register: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Пароль</label>
             <input
               id="password"
               type="password"
@@ -78,7 +78,7 @@ const Register: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
+            <label htmlFor="confirmPassword">Подтвердите пароль</label>
             <input
               id="confirmPassword"
               type="password"
@@ -90,13 +90,13 @@ const Register: React.FC = () => {
           </div>
 
           <button type="submit" className="btn-primary" disabled={loading}>
-            {loading ? 'Registering...' : 'Register'}
+            {loading ? 'Регистрация...' : 'Зарегистрироваться'}
           </button>
         </form>
 
         <div className="auth-footer">
           <p>
-            Already have an account? <Link to="/login">Login</Link>
+            Уже есть аккаунт? <Link to="/login">Войти</Link>
           </p>
         </div>
       </div>

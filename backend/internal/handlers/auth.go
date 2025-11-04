@@ -91,13 +91,13 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 	// Get user
 	user, err := h.store.GetUserByUsername(req.Username)
 	if err != nil {
-		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
+		http.Error(w, "Неверные данные", http.StatusUnauthorized)
 		return
 	}
 
 	// Check password
 	if !utils.CheckPasswordHash(req.Password, user.Password) {
-		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
+		http.Error(w, "Неверный пароль", http.StatusUnauthorized)
 		return
 	}
 

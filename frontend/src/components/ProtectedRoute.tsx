@@ -17,7 +17,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
         alignItems: 'center', 
         height: '100vh' 
       }}>
-        Loading...
+        Загрузка...
       </div>
     );
   }

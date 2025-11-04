@@ -24,41 +24,38 @@ const Dashboard: React.FC = () => {
   };
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div>Загрузка...</div>;
   }
 
   return (
     <div className={`dashboard ${user.theme}`}>
       <header className="dashboard-header">
-        <h1>Cloud Storage</h1>
+        <h1>Облачное хранилище</h1>
         <div className="header-actions">
           <button onClick={handleThemeToggle} className="btn-theme">
-            {user.theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+            {user.theme === 'light' ? '🌙 Тёмная тема' : '☀️ Светлая тема'}
           </button>
           <button onClick={handleLogout} className="btn-logout">
-            Logout
+            Выйти
           </button>
         </div>
       </header>
 
       <main className="dashboard-main">
         <div className="profile-card">
-          <h2>Welcome, {user.username}!</h2>
+          <h2>Добро пожаловать, {user.username}!</h2>
           <div className="profile-info">
             <div className="info-item">
-              <span className="label">Email:</span>
+              <span className="label">Электронная почта:</span>
               <span className="value">{user.email}</span>
             </div>
             <div className="info-item">
-              <span className="label">User ID:</span>
+              <span className="label">ID пользователя:</span>
               <span className="value">{user.id}</span>
             </div>
+            
             <div className="info-item">
-              <span className="label">Theme:</span>
-              <span className="value">{user.theme}</span>
-            </div>
-            <div className="info-item">
-              <span className="label">Member since:</span>
+              <span className="label">Дата регистрации:</span>
               <span className="value">
                 {new Date(user.created_at).toLocaleDateString()}
               </span>
@@ -67,9 +64,9 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="files-section">
-          <h2>My Files</h2>
+          <h2>Мои файлы</h2>
           <p className="placeholder-text">
-            File management features coming soon...
+            Функции управления файлами будут доступны позже...
           </p>
         </div>
       </main>
